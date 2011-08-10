@@ -14,7 +14,6 @@ LimitString
 
 # Update the server with the latest updates
 sudo apt-get update
-sudo apt-get install unzip -y
 sudo apt-get dist-upgrade -y
 
 
@@ -167,8 +166,8 @@ sudo service apache2 restart
 
 
 # Secure the Railo web
-sudo chown -R tomcat /var/www/WEB-INF
-sudo chgrp -R tomcat /var/www 
+sudo chown -hR tomcat /var/www/WEB-INF
+sudo chgrp -hR tomcat /var/www 
 
 
 # Configure Tomcat to start with the system
