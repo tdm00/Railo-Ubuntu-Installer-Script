@@ -5,7 +5,7 @@
 sudo ufw logging on
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
-sudo ufw allow 64022/tcp
+sudo ufw allow 22/tcp
 sudo ufw default deny
 sudo ufw enable <<LimitString
 y
