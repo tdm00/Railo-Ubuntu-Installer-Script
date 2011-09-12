@@ -3,7 +3,7 @@
 # Automated 64-bit Ubuntu Railo Application Server Setup
 # Setup variables
 TOMCAT_VERSION="7.0.21"
-
+JAVA_MINOR_VERSION="27"
 
 # Configure the firewall
 sudo ufw logging on
@@ -22,16 +22,16 @@ sudo apt-get dist-upgrade -y
 
 
 # Download and Install Java
-wget http://download.oracle.com/otn-pub/java/jdk/6u27-b07/jdk-6u27-linux-x64.bin
-sudo chmod +x jdk-6u27-linux-x64.bin
-sudo ./jdk-6u27-linux-x64.bin <<LimitString
+wget http://download.oracle.com/otn-pub/java/jdk/6u$JAVA_MINOR_VERSION-b07/jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
+sudo chmod +x jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
+sudo ./jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin <<LimitString
 yes
 LimitString
-sudo rm -Rf jdk-6u27-linux-i586.bin
+sudo rm -Rf jdk-6u$JAVA_MINOR_VERSION-linux-i586.bin
 sudo mkdir -p /usr/local/java
-sudo mv jdk1.6.0_27/ /usr/local/java
+sudo mv jdk1.6.0_$JAVA_MINOR_VERSION/ /usr/local/java
 sudo rm /usr/local/java/latest
-sudo ln -s /usr/local/java/jdk1.6.0_27 /usr/local/java/latest
+sudo ln -s /usr/local/java/jdk1.6.0_$JAVA_MINOR_VERSION /usr/local/java/latest
 sudo sed -i 1i'JAVA_HOME="/usr/local/java/latest"' /etc/environment
 sudo sed -i 2i'JRE_HOME="/usr/local/java/latest/jre"' /etc/environment
 echo 'PATH="$JAVA_HOME/bin:$PATH"' | sudo tee -a /etc/environment
