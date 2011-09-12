@@ -1,5 +1,9 @@
+#!/bin/bash
+
 # Automated 64-bit Ubuntu Railo Application Server Setup
-#
+# Setup variables
+TOMCAT_VERSION="7.0.21"
+
 
 # Configure the firewall
 sudo ufw logging on
@@ -39,10 +43,10 @@ sudo ln -s /usr/local/java/latest/bin/java /usr/local/bin/java
 
 
 # Download and Install Apache Tomcat server
-sudo wget http://www.carfab.com/apachesoftware/tomcat/tomcat-7/v7.0.21/bin/apache-tomcat-7.0.21.tar.gz
-sudo tar -xvzf apache-tomcat-7.0.20.tar.gz
-sudo mv apache-tomcat-7.0.20 /opt/tomcat
-sudo rm -Rf apache-tomcat-7.0.20.tar.gz
+sudo wget http://www.carfab.com/apachesoftware/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+sudo tar -xvzf apache-tomcat-$TOMCAT_VERSION.tar.gz
+sudo mv apache-tomcat-$TOMCAT_VERSION /tmp/tomcat
+sudo rm -Rf apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 
 # Configure Apache Tomcat
