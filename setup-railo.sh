@@ -1,4 +1,4 @@
-# Automated 32-bit Ubuntu Railo Application Server Setup
+# Automated 64-bit Ubuntu Railo Application Server Setup
 #
 
 # Configure the firewall
