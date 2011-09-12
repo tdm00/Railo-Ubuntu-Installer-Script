@@ -39,7 +39,7 @@ sudo ln -s /usr/local/java/latest/bin/java /usr/local/bin/java
 
 
 # Download and Install Apache Tomcat server
-sudo wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-7/v7.0.20/bin/apache-tomcat-7.0.20.tar.gz
+sudo wget http://www.carfab.com/apachesoftware/tomcat/tomcat-7/v7.0.21/bin/apache-tomcat-7.0.21.tar.gz
 sudo tar -xvzf apache-tomcat-7.0.20.tar.gz
 sudo mv apache-tomcat-7.0.20 /opt/tomcat
 sudo rm -Rf apache-tomcat-7.0.20.tar.gz
