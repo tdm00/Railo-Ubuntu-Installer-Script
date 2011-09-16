@@ -51,11 +51,10 @@ sudo sed -i "$LINENUMBER"i'\\t\tOrder deny,allow' /etc/apache2/sites-available/d
 sudo sed -i "$LINENUMBER"i'\\t<Location \/railo-context\/>' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t#Deny access to admin except for local clients' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tProxyPassReverse \/ http:\/\/127.0.0.1:8080\/' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tProxyPassMatch ^\/(.*\\.cfm)$ http:\/\/127.0.0.1:8080\/$1' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tProxyPassMatch ^\/(.+\.cf[cm])(\/.*)?$ http:\/\/127.0.0.1:8080\/$1' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t#Proxy .cfm and cfc requests to Railo' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm default.cfml index.htm index.html' /etc/apache2/sites-available/default-ssl
 sudo sed -i 's/Deny from all/Allow from all/' /etc/apache2/mods-available/proxy.conf
-
 
 # Start Apache
 sudo service apache2 restart
