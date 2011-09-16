@@ -32,6 +32,7 @@ Once your Ubuntu Server is running, copy this file to the server
 using one of the following methods:
  scp setup-railo.sh <ubuntu-username>@<server ip>
  wget https://raw.github.com/talltroym/Railo-Ubuntu-Installer-Script/master/setup-railo.sh
+  _Note:_ If you use wget you'll need to run dos2unix on the file to convert the line endings
  Copy and paste the contents of this file from your system to a text editor
 
 Next you need to give the script execute privileges by doing:
