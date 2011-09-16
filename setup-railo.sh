@@ -73,7 +73,6 @@ sudo rm /usr/local/java/latest
 sudo ln -s /usr/local/java/jdk1.6.0_$JAVA_MINOR_VERSION /usr/local/java/latest
 sudo sed -i 1i'JAVA_HOME="/usr/local/java/latest"' /etc/environment
 sudo sed -i 2i'JRE_HOME="/usr/local/java/latest/jre"' /etc/environment
-echo 'PATH="$JAVA_HOME/bin:$PATH"' | sudo tee -a /etc/environment
 export JAVA_HOME="/usr/local/java/latest"
 export JRE_HOME="/usr/local/java/latest/jre"
 export PATH="$JAVA_HOME/bin:$PATH"
