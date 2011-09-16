@@ -17,8 +17,48 @@ LimitString
 
 
 # Update the server with the latest updates
-sudo apt-get update
+sudo apt-get update -y
+sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
+
+
+# Install Apache web server
+sudo apt-get install apache2 -y
+sudo a2enmod ssl
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod rewrite
+sudo a2ensite default-ssl
+
+
+# Configure Apache web server
+LINENUMBER=`sudo grep -n "<\/VirtualHost>" /etc/apache2/sites-available/default | sed 's/:.*//'`
+sudo sed -i "$LINENUMBER"i'\\tRewriteRule ^.*$ https:\/\/%{SERVER_NAME}%{REQUEST_URI} [L,R]' /etc/apache2/sites-available/default
+sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{SERVER_PORT} !^443$' /etc/apache2/sites-available/default
+sudo sed -i "$LINENUMBER"i'\\tRewriteEngine on' /etc/apache2/sites-available/default
+sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm default.cfml index.htm index.html' /etc/apache2/sites-available/default
+LINENUMBER=`sudo grep -n "<\/VirtualHost>" /etc/apache2/sites-available/default-ssl | sed 's/:.*//'`
+# Uncomment the following lines IF you want CFWheels rewrite support
+#sudo sed -i "$LINENUMBER"i'\\tRewriteRule "^\/(.*)" http:\/\/127.0.0.1:8080\/rewrite.cfm\/$1 [P,QSA,L]' /etc/apache2/sites-available/default-ssl
+#sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{REQUEST_URI} !^.*\/(flex2gateway|jrunscripts|cfide|cfformgateway|railo-context|files|images|javascripts|miscellaneous|stylesheets|robots.txt|sitemap.xml|rewrite.cfm)($|\/.*$) [NC]' /etc/apache2/sites-available/default-ssl
+#sudo sed -i "$LINENUMBER"i'\\tRewriteEngine On' /etc/apache2/sites-available/default-ssl
+#sudo sed -i "$LINENUMBER"i'\\t#Setup CFWheels with URL Rewriting' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t<\/Location>' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tAllow from 192.168.0.0\/24' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tAllow from 172.16.0.0\/12' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tDeny from all' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tOrder deny,allow' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t<Location \/railo-context\/>' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t#Deny access to admin except for local clients' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tProxyPassReverse \/ http:\/\/127.0.0.1:8080\/' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tProxyPassMatch ^\/(.*\\.cfm)$ http:\/\/127.0.0.1:8080\/$1' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t#Proxy .cfm and cfc requests to Railo' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm default.cfml index.htm index.html' /etc/apache2/sites-available/default-ssl
+sudo sed -i 's/Deny from all/Allow from all/' /etc/apache2/mods-available/proxy.conf
+
+
+# Start Apache
+sudo service apache2 restart
 
 
 # Download and Install Java
@@ -27,7 +67,7 @@ sudo chmod +x jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
 sudo ./jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin <<LimitString
 yes
 LimitString
-sudo rm -Rf jdk-6u$JAVA_MINOR_VERSION-linux-i586.bin
+sudo rm -Rf jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
 sudo mkdir -p /usr/local/java
 sudo mv jdk1.6.0_$JAVA_MINOR_VERSION/ /usr/local/java
 sudo rm /usr/local/java/latest
@@ -45,11 +85,12 @@ sudo ln -s /usr/local/java/latest/bin/java /usr/local/bin/java
 # Download and Install Apache Tomcat server
 sudo wget http://www.carfab.com/apachesoftware/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 sudo tar -xvzf apache-tomcat-$TOMCAT_VERSION.tar.gz
-sudo mv apache-tomcat-$TOMCAT_VERSION /tmp/tomcat
+sudo mv apache-tomcat-$TOMCAT_VERSION /opt/tomcat
 sudo rm -Rf apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 
 # Configure Apache Tomcat
+sudo touch /opt/tomcat/bin/setenv.sh
 echo 'JAVA_HOME="/usr/local/java/latest"' | sudo tee -a /opt/tomcat/bin/setenv.sh
 echo 'JRE_HOME="/usr/local/java/latest/jre"' | sudo tee -a /opt/tomcat/bin/setenv.sh
 
@@ -126,52 +167,20 @@ sudo sed -i "$LINENUMBER"i'\\t\t<Context path="" docBase="/var/www"/>' /opt/tomc
 sudo chown -R tomcat:tomcat /opt/railo 
 
 
-# Start Tomcat 
+# Start Tomcat, this creates the Railo server context
 sudo -u tomcat /opt/tomcat/bin/startup.sh
 
 
-# Install Apache web server
-sudo apt-get install apache2 -y
-sudo a2enmod ssl
-sudo a2enmod proxy
-sudo a2enmod proxy_http
-sudo a2enmod rewrite
-sudo a2ensite default-ssl
+# Wait for Tomcat to start and load the Railo engine
+sleep 2m
 
 
-# Configure Apache web server
-LINENUMBER=`sudo grep -n "<\/VirtualHost>" /etc/apache2/sites-available/default | sed 's/:.*//'`
-sudo sed -i "$LINENUMBER"i'\\tRewriteRule ^.*$ https:\/\/%{SERVER_NAME}%{REQUEST_URI} [L,R]' /etc/apache2/sites-available/default
-sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{SERVER_PORT} !^443$' /etc/apache2/sites-available/default
-sudo sed -i "$LINENUMBER"i'\\tRewriteEngine on' /etc/apache2/sites-available/default
-sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm default.cfml index.htm index.html' /etc/apache2/sites-available/default
-LINENUMBER=`sudo grep -n "<\/VirtualHost>" /etc/apache2/sites-available/default-ssl | sed 's/:.*//'`
-# Uncomment the following lines IF you want CFWheels rewrite support
-#sudo sed -i "$LINENUMBER"i'\\tRewriteRule "^\/(.*)" http:\/\/127.0.0.1:8080\/rewrite.cfm\/$1 [P,QSA,L]' /etc/apache2/sites-available/default-ssl
-#sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{REQUEST_URI} !^.*\/(flex2gateway|jrunscripts|cfide|cfformgateway|railo-context|files|images|javascripts|miscellaneous|stylesheets|robots.txt|sitemap.xml|rewrite.cfm)($|\/.*$) [NC]' /etc/apache2/sites-available/default-ssl
-#sudo sed -i "$LINENUMBER"i'\\tRewriteEngine On' /etc/apache2/sites-available/default-ssl
-#sudo sed -i "$LINENUMBER"i'\\t#Setup CFWheels with URL Rewriting' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t<\/Location>' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tAllow from 192.168.0.0\/24' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tAllow from 172.16.0.0\/12' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tDeny from all' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tOrder deny,allow' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t<Location \/railo-context\/>' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t#Deny access to admin except for local clients' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tProxyPassReverse \/ http:\/\/127.0.0.1:8080\/' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tProxyPassMatch ^\/(.*\\.cfm)$ http:\/\/127.0.0.1:8080\/$1' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t#Proxy .cfm and cfc requests to Railo' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm default.cfml index.htm index.html' /etc/apache2/sites-available/default-ssl
-sudo sed -i 's/Deny from all/Allow from all/' /etc/apache2/mods-available/proxy.conf
+# Shutdown Tomcat 
+sudo -u tomcat /opt/tomcat/bin/shutdown.sh
 
 
-# Start Apache
-sudo service apache2 restart
-
-
-# Secure the Railo web
-sudo chown -hR tomcat /var/www/WEB-INF
-sudo chgrp -hR tomcat /var/www 
+# Wait for Tomcat to shutdown
+sleep 1m
 
 
 # Configure Tomcat to start with the system
@@ -216,3 +225,56 @@ echo 'exit 0 ' >> /etc/init.d/tomcat
 cd /etc/init.d/
 sudo chmod 755 tomcat
 sudo update-rc.d tomcat defaults
+
+
+# Setup default CFML page
+sudo echo '<html>' > ~/index.cfm
+sudo echo '<head>' >> ~/index.cfm
+sudo echo '<title>' >> ~/index.cfm
+sudo echo 'Welcome to Railo!' >> ~/index.cfm
+sudo echo '</title>' >> ~/index.cfm
+sudo echo '</head>' >> ~/index.cfm
+sudo echo '<body>' >> ~/index.cfm
+sudo echo '<h3>' >> ~/index.cfm
+sudo echo 'Welcome to Railo running on Tomcat!' >> ~/index.cfm
+sudo echo '</h3>' >> ~/index.cfm
+sudo echo '</body>' >> ~/index.cfm
+sudo echo '</html>' >> ~/index.cfm
+sudo mv ~/index.cfm /var/www/index.cfm
+sudo chown root /var/www/index.cfm
+sudo chgrp tomcat /var/www/index.cfm
+
+
+# Give Tomcat some time, for some reason it needs this, before it can create the /var/www/WEB-INF
+sleep 2m
+
+
+# Start Tomcat, this still doesn't create the Railo web context, not sure why
+sudo -u tomcat /opt/tomcat/bin/startup.sh
+
+
+# Wait for Tomcat to start and load the Railo engine
+sleep 2m
+
+
+# Shutdown Tomcat 
+sudo -u tomcat /opt/tomcat/bin/shutdown.sh
+
+
+# Wait for Tomcat to shutdown
+sleep 1m
+
+
+# Start Tomcat, this finally creates the Railo web context, not sure why it takes three starts
+sudo -u tomcat /opt/tomcat/bin/startup.sh
+
+
+# Wait for Tomcat to start and load the Railo engine
+sleep 2m
+
+
+# Secure the Railo web
+sudo mkdir -p /var/www/WEB-INF
+sudo chown -hR tomcat /var/www/WEB-INF
+sudo chgrp -hR tomcat /var/www 
+
