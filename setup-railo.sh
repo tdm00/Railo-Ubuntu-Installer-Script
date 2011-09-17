@@ -271,6 +271,10 @@ sudo -u tomcat /opt/tomcat/bin/startup.sh
 sleep 2m
 
 
+# Install unzip utility
+sudo apt-get install unzip -y
+
+
 # Secure the Railo web
 sudo mkdir -p /var/www/WEB-INF
 sudo chown -hR tomcat /var/www/WEB-INF
