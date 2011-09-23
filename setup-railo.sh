@@ -48,7 +48,7 @@ sudo sed -i "$LINENUMBER"i'\\t\tAllow from 192.168.0.0\/24' /etc/apache2/sites-a
 sudo sed -i "$LINENUMBER"i'\\t\tAllow from 172.16.0.0\/12' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tDeny from all' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tOrder deny,allow' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t<Location \/railo-context\/>' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t<Location \/railo-context\/admin\/>' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t#Deny access to admin except for local clients' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tProxyPassReverse \/ http:\/\/127.0.0.1:8080\/' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tProxyPassMatch ^\/(.+\.cf[cm])(\/.*)?$ http:\/\/127.0.0.1:8080\/$1' /etc/apache2/sites-available/default-ssl
