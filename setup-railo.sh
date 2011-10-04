@@ -4,6 +4,7 @@
 # Setup variables
 TOMCAT_VERSION="7.0.22"
 JAVA_MINOR_VERSION="27"
+RAILO_VERSION="3.3.1.000"
 
 # Configure the firewall
 sudo ufw logging on
@@ -115,10 +116,10 @@ sudo chmod -R u+wx /opt/tomcat/logs
 
 
 # Download and Install Railo
-sudo wget http://www.getrailo.org/down.cfm?item=/railo/remote/download/3.2.3.000/custom/all/railo-3.2.3.000-jars.tar.gz -O railo-3.2.3.000-jars.tar.gz
-sudo tar -xvzf railo-3.2.3.000-jars.tar.gz
-sudo mv railo-3.2.3.000-jars /opt/railo
-sudo rm -Rf railo-3.2.3.000-jars.tar.gz
+sudo wget http://www.getrailo.org/down.cfm?item=/railo/remote/download/$RAILO_VERSION/custom/all/railo-$RAILO_VERSION-jars.tar.gz -O railo-$RAILO_VERSION-jars.tar.gz
+sudo tar -xvzf railo-$RAILO_VERSION-jars.tar.gz
+sudo mv railo-$RAILO_VERSION-jars /opt/railo
+sudo rm -Rf railo-$RAILO_VERSION-jars.tar.gz
 
 
 # Configure Railo
