@@ -2,7 +2,7 @@
 
 # Automated 64-bit Ubuntu Railo Application Server Setup
 # Setup variables
-TOMCAT_VERSION="7.0.21"
+TOMCAT_VERSION="7.0.22"
 JAVA_MINOR_VERSION="27"
 
 # Configure the firewall
