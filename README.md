@@ -10,7 +10,7 @@ configure the following software with minimal user interaction:
  * Apache 2.2.x
  * Java SE 1.6_27
  * Tomcat 7.0.22
- * Railo 3.2.3
+ * Railo 3.3.1
 
 
 The Latest Version
