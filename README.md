@@ -9,7 +9,7 @@ configure the following software with minimal user interaction:
  * Ubuntu Server 10.04 LTS 64-bit; Ubuntu Server 11.04 LTS 64-bit
  * Apache 2.2.x
  * Java SE 1.6_27
- * Tomcat 7.0.21
+ * Tomcat 7.0.22
  * Railo 3.2.3
 
 
