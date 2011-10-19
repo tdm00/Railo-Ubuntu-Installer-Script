@@ -6,7 +6,11 @@ The Railo installation script for Ubuntu is a single script that
 can be executed on a Ubuntu Server to download, install and
 configure the following software with minimal user interaction:
 
- * Ubuntu Server 10.04 LTS 64-bit; Ubuntu Server 11.04 LTS 64-bit
+ * Ubuntu Server
+   * 10.04 LTS 64-bit
+   * 10.10 64-bit
+   * 11.04 64-bit
+   * 11.10 64-bit
  * Apache 2.2.x
  * Java SE 1.6_29
  * Tomcat 7.0.22
