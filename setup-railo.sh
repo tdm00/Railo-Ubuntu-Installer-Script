@@ -82,7 +82,7 @@ sudo ln -s /usr/local/java/latest/bin/java /usr/local/bin/java
 
 
 # Download and Install Apache Tomcat server
-sudo wget http://www.carfab.com/apachesoftware/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+sudo wget http://mirrors.axint.net/apache/tomcat/tomcat-7/v7.0.TOMCAT_VERSION/bin/apache-tomcat-7.0.TOMCAT_VERSION.tar.gz
 sudo tar -xvzf apache-tomcat-$TOMCAT_VERSION.tar.gz
 sudo mv apache-tomcat-$TOMCAT_VERSION /opt/tomcat
 sudo rm -Rf apache-tomcat-$TOMCAT_VERSION.tar.gz
@@ -234,9 +234,12 @@ sudo echo 'Welcome to Railo!' >> ~/index.cfm
 sudo echo '</title>' >> ~/index.cfm
 sudo echo '</head>' >> ~/index.cfm
 sudo echo '<body>' >> ~/index.cfm
-sudo echo '<h3>' >> ~/index.cfm
+sudo echo '<h1>' >> ~/index.cfm
 sudo echo 'Welcome to Railo running on Tomcat!' >> ~/index.cfm
-sudo echo '</h3>' >> ~/index.cfm
+sudo echo '</h1>' >> ~/index.cfm
+sudo echo '<h2>' >> ~/index.cfm
+sudo echo 'Current date and time are <cfoutput>#Now()#</cfoutput>' >> ~/index.cfm
+sudo echo '</h2>' >> ~/index.cfm
 sudo echo '</body>' >> ~/index.cfm
 sudo echo '</html>' >> ~/index.cfm
 sudo mv ~/index.cfm /var/www/index.cfm
