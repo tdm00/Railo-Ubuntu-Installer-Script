@@ -46,7 +46,7 @@ LINENUMBER=`sudo grep -n "<\/VirtualHost>" /etc/apache2/sites-available/default-
 #sudo sed -i "$LINENUMBER"i'\\t#Setup CFWheels with URL Rewriting' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t<\/Location>' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tAllow from 192.168.0.0\/24' /etc/apache2/sites-available/default-ssl
-sudo sed -i "$LINENUMBER"i'\\t\tAllow from 172.16.0.0\/12' /etc/apache2/sites-available/default-ssl
+sudo sed -i "$LINENUMBER"i'\\t\tAllow from 172.16.0.0\/16' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tDeny from all' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t\tOrder deny,allow' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t<Location \/railo-context\/admin\/>' /etc/apache2/sites-available/default-ssl
