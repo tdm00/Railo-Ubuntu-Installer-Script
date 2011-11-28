@@ -2,7 +2,7 @@
 
 # Automated 64-bit Ubuntu Railo Application Server Setup
 # Setup variables
-TOMCAT_VERSION="7.0.22"
+TOMCAT_VERSION="7.0.23"
 JAVA_MINOR_VERSION="29"
 RAILO_VERSION="3.3.1.000"
 

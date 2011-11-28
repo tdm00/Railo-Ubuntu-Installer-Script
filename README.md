@@ -13,7 +13,7 @@ configure the following software with minimal user interaction:
    * 11.10 64-bit
  * Apache 2.2.x
  * Java SE 1.6_29
- * Tomcat 7.0.22
+ * Tomcat 7.0.23
  * Railo 3.3.1.000
 
 
