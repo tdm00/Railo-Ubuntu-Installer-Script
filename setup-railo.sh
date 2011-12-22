@@ -3,7 +3,7 @@
 # Automated 64-bit Ubuntu Railo Application Server Setup
 # Setup variables
 TOMCAT_VERSION="7.0.23"
-JAVA_MINOR_VERSION="29"
+JAVA_MINOR_VERSION="30"
 RAILO_VERSION="3.3.1.000"
 
 # Configure the firewall
@@ -62,7 +62,7 @@ sudo service apache2 restart
 
 
 # Download and Install Java
-wget http://download.oracle.com/otn-pub/java/jdk/6u$JAVA_MINOR_VERSION-b11/jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
+wget http://download.oracle.com/otn-pub/java/jdk/6u$JAVA_MINOR_VERSION-b12/jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
 sudo chmod +x jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
 sudo ./jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin <<LimitString
 yes
