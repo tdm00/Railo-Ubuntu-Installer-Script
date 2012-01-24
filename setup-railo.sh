@@ -41,7 +41,7 @@ sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm de
 LINENUMBER=`sudo grep -n "<\/VirtualHost>" /etc/apache2/sites-available/default-ssl | sed 's/:.*//'`
 # Uncomment the following lines IF you want CFWheels rewrite support
 #sudo sed -i "$LINENUMBER"i'\\tRewriteRule "^\/(.*)" http:\/\/127.0.0.1:8080\/rewrite.cfm\/$1 [P,QSA,L]' /etc/apache2/sites-available/default-ssl
-#sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{REQUEST_URI} !^.*\/(flex2gateway|jrunscripts|cfide|cfformgateway|railo-context|files|images|javascripts|miscellaneous|stylesheets|robots.txt|sitemap.xml|rewrite.cfm)($|\/.*$) [NC]' /etc/apache2/sites-available/default-ssl
+#sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{REQUEST_URI} !^.*\/(flex2gateway|jrunscripts|cfide|cfformgateway|railo-context|files|images|javascripts|miscellaneous|stylesheets|robots.txt|sitemap.xml|favicon.ico|rewrite.cfm)($|\/.*$) [NC]' /etc/apache2/sites-available/default-ssl
 #sudo sed -i "$LINENUMBER"i'\\tRewriteEngine On' /etc/apache2/sites-available/default-ssl
 #sudo sed -i "$LINENUMBER"i'\\t#Setup CFWheels with URL Rewriting' /etc/apache2/sites-available/default-ssl
 sudo sed -i "$LINENUMBER"i'\\t<\/Location>' /etc/apache2/sites-available/default-ssl
