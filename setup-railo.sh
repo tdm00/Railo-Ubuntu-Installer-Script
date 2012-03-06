@@ -1,20 +1,16 @@
 #!/bin/bash
 
-# Automated 64-bit Ubuntu Railo Application Server Setup
-# Setup variables
-TOMCAT_VERSION="7.0.25"
-JAVA_MINOR_VERSION="30"
-RAILO_VERSION="3.3.1.000"
 
 # Configure the firewall
-sudo ufw logging on
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 22/tcp
-sudo ufw default deny
-sudo ufw enable <<LimitString
-y
-LimitString
+# Uncomment the following lines to enable the firewall
+#sudo ufw logging on
+#sudo ufw allow 80/tcp
+#sudo ufw allow 443/tcp
+#sudo ufw allow 22/tcp
+#sudo ufw default deny
+#sudo ufw enable <<LimitString
+#y
+#LimitString
 
 
 # Update the server with the latest updates
@@ -39,7 +35,7 @@ sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{SERVER_PORT} !^443$' /etc/apache2/si
 sudo sed -i "$LINENUMBER"i'\\tRewriteEngine on' /etc/apache2/sites-available/default
 sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm default.cfml index.htm index.html' /etc/apache2/sites-available/default
 LINENUMBER=`sudo grep -n "<\/VirtualHost>" /etc/apache2/sites-available/default-ssl | sed 's/:.*//'`
-# Uncomment the following lines IF you want CFWheels rewrite support
+# Uncomment the following lines if you want CFWheels rewrite support
 #sudo sed -i "$LINENUMBER"i'\\tRewriteRule "^\/(.*)" http:\/\/127.0.0.1:8080\/rewrite.cfm\/$1 [P,QSA,L]' /etc/apache2/sites-available/default-ssl
 #sudo sed -i "$LINENUMBER"i'\\tRewriteCond %{REQUEST_URI} !^.*\/(flex2gateway|jrunscripts|cfide|cfformgateway|railo-context|files|images|javascripts|miscellaneous|stylesheets|robots.txt|sitemap.xml|favicon.ico|rewrite.cfm)($|\/.*$) [NC]' /etc/apache2/sites-available/default-ssl
 #sudo sed -i "$LINENUMBER"i'\\tRewriteEngine On' /etc/apache2/sites-available/default-ssl
@@ -57,14 +53,14 @@ sudo sed -i "$LINENUMBER"i'\\t#Proxy .cfm and cfc requests to Railo' /etc/apache
 sudo sed -i "$LINENUMBER"i'\\tDirectoryIndex index.cfm index.cfml default.cfm default.cfml index.htm index.html' /etc/apache2/sites-available/default-ssl
 sudo sed -i 's/Deny from all/Allow from all/' /etc/apache2/mods-available/proxy.conf
 
-# Start Apache
+# Restart Apache
 sudo service apache2 restart
 
 
 # Download and Install Java
-wget http://download.oracle.com/otn-pub/java/jdk/6u$JAVA_MINOR_VERSION-b12/jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
-sudo chmod +x jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
-sudo ./jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin <<LimitString
+wget http://dl.dropbox.com/u/2858263/jdk-6u31-linux-x64.bin
+sudo chmod +x jdk-6u31-linux-x64.bin
+sudo ./jdk-6u31-linux-x64.bin <<LimitString
 yes
 LimitString
 sudo rm -Rf jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
@@ -82,10 +78,10 @@ sudo ln -s /usr/local/java/latest/bin/java /usr/local/bin/java
 
 
 # Download and Install Apache Tomcat server
-sudo wget http://apache.cs.utah.edu/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
-sudo tar -xvzf apache-tomcat-$TOMCAT_VERSION.tar.gz
+sudo wget http://dl.dropbox.com/u/2858263/apache-tomcat-7.0.26.tar.gz
+sudo tar -xvzf apache-tomcat-7.0.26.tar.gz
 sudo mv apache-tomcat-$TOMCAT_VERSION /opt/tomcat/
-sudo rm -Rf apache-tomcat-$TOMCAT_VERSION.tar.gz
+sudo rm -Rf apache-tomcat-7.0.26.tar.gz
 
 
 # Configure Apache Tomcat
@@ -116,10 +112,10 @@ sudo chmod -R u+wx /opt/tomcat/logs
 
 
 # Download and Install Railo
-sudo wget http://www.getrailo.org/down.cfm?item=/railo/remote/download/$RAILO_VERSION/custom/all/railo-$RAILO_VERSION-jars.tar.gz -O railo-$RAILO_VERSION-jars.tar.gz
-sudo tar -xvzf railo-$RAILO_VERSION-jars.tar.gz
+sudo wget http://dl.dropbox.com/u/2858263/railo-3.3.1.000-jars.tar.gz
+sudo tar -xvzf railo-3.3.1.000-jars.tar.gz
 sudo mv railo-$RAILO_VERSION-jars /opt/railo
-sudo rm -Rf railo-$RAILO_VERSION-jars.tar.gz
+sudo rm -Rf railo-3.3.1.000-jars.tar.gz
 
 
 # Configure Railo

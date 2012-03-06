@@ -12,8 +12,8 @@ configure the following software with minimal user interaction:
    * 11.04 64-bit
    * 11.10 64-bit
  * Apache 2.2.x
- * Java SE 1.6_29
- * Tomcat 7.0.23
+ * Java SE 1.6_31
+ * Tomcat 7.0.26
  * Railo 3.3.1.000
 
 
@@ -35,15 +35,22 @@ Installation
 ------------
 Once your Ubuntu Server is running, copy this file to the server
 using one of the following methods:
- scp setup-railo.sh <ubuntu-username>@<server ip>
- wget https://raw.github.com/talltroym/Railo-Ubuntu-Installer-Script/master/setup-railo.sh
-  _Note:_ If you use wget you'll need to run fromdos setup-railo.sh on the file to convert the line endings.  You can install this by doing sudo aptitude install tofrodos
- Copy and paste the contents of this file from your system to a text editor
+ 1. Copy and paste the contents of this file from your system to a text editor
+ 2. scp setup-railo.sh <ubuntu-username>@<server ip>
+ 3. wget https://raw.github.com/talltroym/Railo-Ubuntu-Installer-Script/master/setup-railo.sh
+
+_Note:_ If you use wget you'll need to run fromdos setup-railo.sh on the file to convert the line endings.  
+You can install this using the following commands:
+ sudo aptitude install tofrodos
+ fromdos setup-railo.sh
 
 Next you need to give the script execute privileges by doing:
  sudo chmod +x setup-railo.sh
 
-Last, execute the script by typing: sudo ./setup-railo.sh
+Last, execute the script by typing:
+ sudo ./setup-railo.sh
+
+Once this script has completed, you should have a running copy of Railo on your system.  Open your Internet browser and point to the servers IP address or DNS name and you should see the sample CFML page with the current date and time.
 
 
 Licensing
