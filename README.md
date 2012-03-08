@@ -1,6 +1,6 @@
 # Railo Installation Script for Ubuntu
 
-## What is it?
+## What is this script do?
 The Railo installation script for Ubuntu is a single script that can be executed on a Ubuntu Server to download, install and configure the following software with minimal user interaction:
 
  * Ubuntu Server
