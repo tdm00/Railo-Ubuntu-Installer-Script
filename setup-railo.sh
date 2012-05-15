@@ -63,11 +63,11 @@ sudo chmod +x jdk-6u31-linux-x64.bin
 sudo ./jdk-6u31-linux-x64.bin <<LimitString
 yes
 LimitString
-sudo rm -Rf jdk-6u$JAVA_MINOR_VERSION-linux-x64.bin
+sudo rm -Rf jdk-6u31-linux-x64
 sudo mkdir -p /usr/local/java
-sudo mv jdk1.6.0_$JAVA_MINOR_VERSION/ /usr/local/java
+sudo mv jdk1.6.0_31/ /usr/local/java
 sudo rm /usr/local/java/latest
-sudo ln -s /usr/local/java/jdk1.6.0_$JAVA_MINOR_VERSION /usr/local/java/latest
+sudo ln -s /usr/local/java/jdk1.6.0_31 /usr/local/java/latest
 sudo sed -i 1i'JAVA_HOME="/usr/local/java/latest"' /etc/environment
 sudo sed -i 2i'JRE_HOME="/usr/local/java/latest/jre"' /etc/environment
 export JAVA_HOME="/usr/local/java/latest"
@@ -80,7 +80,7 @@ sudo ln -s /usr/local/java/latest/bin/java /usr/local/bin/java
 # Download and Install Apache Tomcat server
 sudo wget http://dl.dropbox.com/u/2858263/apache-tomcat-7.0.26.tar.gz
 sudo tar -xvzf apache-tomcat-7.0.26.tar.gz
-sudo mv apache-tomcat-$TOMCAT_VERSION /opt/tomcat/
+sudo mv apache-tomcat-7.0.26 /opt/tomcat
 sudo rm -Rf apache-tomcat-7.0.26.tar.gz
 
 
@@ -114,7 +114,7 @@ sudo chmod -R u+wx /opt/tomcat/logs
 # Download and Install Railo
 sudo wget http://dl.dropbox.com/u/2858263/railo-3.3.1.000-jars.tar.gz
 sudo tar -xvzf railo-3.3.1.000-jars.tar.gz
-sudo mv railo-$RAILO_VERSION-jars /opt/railo
+sudo mv railo-3.3.1.000-jars /opt/railo
 sudo rm -Rf railo-3.3.1.000-jars.tar.gz
 
 
