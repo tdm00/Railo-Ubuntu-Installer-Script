@@ -58,9 +58,9 @@ sudo service apache2 restart
 
 
 # Download and Install Java
-wget http://dl.dropbox.com/u/2858263/jdk-6u31-linux-x64.bin
-sudo chmod +x jdk-6u31-linux-x64.bin
-sudo ./jdk-6u31-linux-x64.bin <<LimitString
+wget https://dl.dropbox.com/u/2858263/jdk-6u33-linux-x64.bin
+sudo chmod +x jdk-6u33-linux-x64.bin
+sudo ./jdk-6u33-linux-x64.bin <<LimitString
 yes
 LimitString
 sudo rm -Rf jdk-6u31-linux-x64
