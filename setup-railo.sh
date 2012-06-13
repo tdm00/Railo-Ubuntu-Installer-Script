@@ -78,10 +78,10 @@ sudo ln -s /usr/local/java/latest/bin/java /usr/local/bin/java
 
 
 # Download and Install Apache Tomcat server
-sudo wget http://dl.dropbox.com/u/2858263/apache-tomcat-7.0.26.tar.gz
-sudo tar -xvzf apache-tomcat-7.0.26.tar.gz
-sudo mv apache-tomcat-7.0.26 /opt/tomcat
-sudo rm -Rf apache-tomcat-7.0.26.tar.gz
+sudo wget https://dl.dropbox.com/u/2858263/apache-tomcat-7.0.27.tar.gz
+sudo tar -xvzf apache-tomcat-7.0.27.tar.gz
+sudo mv apache-tomcat-7.0.27 /opt/tomcat
+sudo rm -Rf apache-tomcat-7.0.27.tar.gz
 
 
 # Configure Apache Tomcat
