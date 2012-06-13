@@ -112,10 +112,10 @@ sudo chmod -R u+wx /opt/tomcat/logs
 
 
 # Download and Install Railo
-sudo wget http://dl.dropbox.com/u/2858263/railo-3.3.1.000-jars.tar.gz
-sudo tar -xvzf railo-3.3.1.000-jars.tar.gz
-sudo mv railo-3.3.1.000-jars /opt/railo
-sudo rm -Rf railo-3.3.1.000-jars.tar.gz
+sudo wget https://dl.dropbox.com/u/2858263/railo-3.3.3.001-jars.tar.gz
+sudo tar -xvzf railo-3.3.3.001-jars.tar.gz
+sudo mv railo-3.3.3.001-jars /opt/railo
+sudo rm -Rf railo-3.3.3.001-jars.tar.gz
 
 
 # Configure Railo
