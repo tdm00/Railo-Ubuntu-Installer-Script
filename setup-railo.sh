@@ -63,11 +63,11 @@ sudo chmod +x jdk-6u33-linux-x64.bin
 sudo ./jdk-6u33-linux-x64.bin <<LimitString
 yes
 LimitString
-sudo rm -Rf jdk-6u31-linux-x64
+sudo rm -Rf jdk-6u33-linux-x64
 sudo mkdir -p /usr/local/java
-sudo mv jdk1.6.0_31/ /usr/local/java
+sudo mv jdk1.6.0_33/ /usr/local/java
 sudo rm /usr/local/java/latest
-sudo ln -s /usr/local/java/jdk1.6.0_31 /usr/local/java/latest
+sudo ln -s /usr/local/java/jdk1.6.0_33 /usr/local/java/latest
 sudo sed -i 1i'JAVA_HOME="/usr/local/java/latest"' /etc/environment
 sudo sed -i 2i'JRE_HOME="/usr/local/java/latest/jre"' /etc/environment
 export JAVA_HOME="/usr/local/java/latest"
