@@ -14,7 +14,7 @@ The Railo installation script for Ubuntu is a single script that can be executed
  * Railo 3.3.1.000
 
 ## The Latest Version
-The latest version of this script can always be found at the Github project page which is located at [https://github.com/talltroym/Railo-Ubuntu-Installer-Script](https://github.com/talltroym/Railo-Ubuntu-Installer-Script)
+The latest version of this script can always be found at the Github project page which is located at [https://github.com/talltroym/Railo-Ubuntu-Installer-Script](https://github.com/tdm00/Railo-Ubuntu-Installer-Script)
 
 Details of the latest version can be found on the Apache HTTP server project page under [http://httpd.apache.org/](http://httpd.apache.org/)
 
@@ -27,7 +27,7 @@ using one of the following methods:
 
  1. Copy and paste the contents of this file from your system to a text editor
  2. `scp setup-railo.sh <ubuntu-username>@<server ip>`
- 3. `wget https://raw.github.com/talltroym/Railo-Ubuntu-Installer-Script/master/setup-railo.sh`
+ 3. `wget https://raw.github.com/tdm00/Railo-Ubuntu-Installer-Script/master/setup-railo.sh`
 
 
 _Note:_ If you use wget you'll need to run `fromdos setup-railo.sh` on the file to convert the line endings.  You can install this program and run it using the following commands:
